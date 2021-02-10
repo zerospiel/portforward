@@ -278,7 +278,7 @@ func (p *PortForward) getFromEndpoints(ctx context.Context) (string, error) {
 	randEp := eps.Items[rand.Intn(len(eps.Items))]
 	for _, s := range randEp.Subsets {
 		for _, a := range s.Addresses {
-			if a.TargetRef != nil {
+			if a.TargetRef != nil && a.TargetRef.Kind == "Pod" {
 				return a.TargetRef.Name, nil
 			}
 		}
